@@ -1,92 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="css/vanilla.css">
-</head>
+<meta charset="UTF-8"> 
+<!-- If IE use the latest rendering engine -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Set the page to the width of the device and set the zoon level -->
+<meta name="viewport" content="width = device-width, initial-scale = 1">
+<!-- Styls -->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/vanilla.css">
+<title>Hi, i'm CJ Hardwick</title> 
 
 <body>
-    <h1>Tools</h1>
+<div class="container">
+
+    <div class="page-header">
+        <h1>Tools</h1>
+    </div>
+
+    <div class="container">
         <h2>Remove Whitespace and Linebreaks</h2>
+
+    <div class="col-md-6">
             <form>
-                <div><h3>What do you want to clean?</h3></div>
-                <div><input type="checkbox" id="whitespace">Remove Whitespace</input></div>
-                <div><input type="checkbox" id="linebreaks">Linebreak to Comma</input></div>
-                <div><textarea id="dirtyText"></textarea><div>
-                <!--<button type="submit">Submit</button>-->
-                <button type="button" onclick="stringCleaner(document.getElementById('dirtyText').value, document.getElementById('whitespace').checked, document.getElementById('linebreaks').checked)">Clean Now</button>
+                <div class="col-md-6">
+                    <input type="checkbox" id="whitespace">Remove Whitespace</input></div>
+                <div class="col-md-6">
+                    <input type="checkbox" id="linebreaks">Linebreak to Comma</input></div>
+                <textarea id="dirtyText"></textarea>
+                <div class="centerElements">
+                    <button type="button" onclick="stringCleaner(document.getElementById('dirtyText').value, document.getElementById('whitespace').checked, document.getElementById('linebreaks').checked)">Clean Now</button>
+                </div>
             </form>
+    </div>
+    
+    <div class="col-md-6">
+        <!-- OUTPUT cleanText -->
+        Output
+        <div id="cleanTextOutput" class="well"></div>
+    </div>
 
-            <div id="cleanTextOutput">
-
-                <p>
-                    
-                </p>
-            </div>
-
-    <script>
-        // FUNCTION - Remove Whitespace
-            function removeWhitespace(text){
-                var cleanText = text.replace(/\s/g,'');
-                return cleanText;
-            }
-        
-        // FUNCTION - Replace LINEBREAKS with COMMAS
-            function linebreakToComma(text){
-                var cleanText = text.replace(/\r?\n|\r/g,',');
-                return cleanText;
-            }
-
-        function stringCleaner(dirtyText,whitespace,linebreaks){
-        //check received arguments
-            //console.log("dirtyText="+dirtyText,"whitespace="+whitespace,"linebreaks="+linebreaks);
-               
-            //check options for cleaning
-                if (whitespace && linebreaks){
+        <script>
+            // FUNCTION - Remove Whitespace
+                function removeWhitespace(text){
+                    var cleanText = text.replace(/\s/g,'');
+                    return cleanText;
+                }
+            
+            // FUNCTION - Replace LINEBREAKS with COMMAS
+                function linebreakToComma(text){
+                    var cleanText = text.replace(/\r?\n|\r/g,',');
+                    return cleanText;
+                }
+            
+            // FUNCTION - Perform String Cleaning
+            function stringCleaner(dirtyText,whitespace,linebreaks){
+                //Based on checkbox values, do the following...
+                if (dirtyText.length == 0){
+                    cleanText = "No text found";
+                }
+                else if (whitespace && linebreaks){
                     var cleanText = linebreakToComma(dirtyText);
                         cleanText = removeWhitespace(cleanText);
-                        console.log("whitespace and linebreak="+cleanText);
                 }
                 else if (whitespace){
                     cleanText = removeWhitespace(dirtyText);
-                    console.log("whitespace="+cleanText);
                 }
                 else if (linebreaks){
                     cleanText = linebreakToComma(dirtyText);
-                    console.log("linebreak="+cleanText);
                 }
-
                 else {
-                    if(!whitespace && !linebreaks){
-                        cleanText = "No checkboxes ticked";
-                    }
-                    
-                    // TODO - if no text entered, output the below -  doesnt work with this, empty textarea resolves to TRUE in initial IF ??
-                    else { 
-                        cleanText = "No text entered";
-                    }
+                    cleanText = "No checkboxes ticked";
                 }
-
-            //Output cleanText to page
-                //alert(cleanText);
-                    var node = document.createElement("p");
-                    var textnode = document.createTextNode(cleanText);
-                    node.appendChild(textnode);
-                    document.getElementById("cleanTextOutput").appendChild(node);
-                    }
-
-
-        
-        
-        // TODO
-            // TODO : create line breaks at max field with of SFDC field
+                
+                //Output cleanText to page
+                document.getElementById("cleanTextOutput").innerHTML = cleanText;
+            
+            } //END stringCleaner FUNCTION
+            
+        </script>
+    </body>   
+    </html>
 
 
-
-
-
-
-
-    </script>
-
-</body>   
-</html>
