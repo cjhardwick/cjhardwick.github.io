@@ -23,21 +23,26 @@
 
     <div class="col-md-6">
             <form>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <input type="checkbox" id="whitespace">Remove Whitespace</input></div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <input type="checkbox" id="linebreaks">Linebreak to Comma</input></div>
+                <div class="col-md-4">
+                    <input type="checkbox" id="tabs">Remove Tabs</input></div>
                 <textarea id="dirtyText"></textarea>
                 <div class="centerElements">
-                    <button type="button" onclick="stringCleaner(document.getElementById('dirtyText').value, document.getElementById('whitespace').checked, document.getElementById('linebreaks').checked)">Clean Now</button>
+                    <button type="button" 
+                        onclick="   stringCleaner(document.getElementById('dirtyText').value, 
+                                    document.getElementById('whitespace').checked,
+                                    document.getElementById('linebreaks').checked,
+                                    document.getElementById('tabs').checked)">Clean Now</button>
                 </div>
             </form>
     </div>
     
     <div class="col-md-6">
         <!-- OUTPUT cleanText -->
-        Output
-        <div id="cleanTextOutput" class="well"></div>
+        <textarea id="cleanTextOutput"></textarea>
     </div>
 
         <script>
@@ -46,7 +51,13 @@
                     var cleanText = text.replace(/\s/g,'');
                     return cleanText;
                 }
-            
+
+            // FUNCTION - Remove Tabs
+            function removeTabs(text){
+                var cleanText = text.replace(/\t/g,'');
+                return cleanText;
+            }
+        
             // FUNCTION - Replace LINEBREAKS with COMMAS
                 function linebreakToComma(text){
                     var cleanText = text.replace(/\r?\n|\r/g,',');
@@ -54,7 +65,7 @@
                 }
             
             // FUNCTION - Perform String Cleaning
-            function stringCleaner(dirtyText,whitespace,linebreaks){
+            function stringCleaner(dirtyText,whitespace,linebreaks,tabs){
                 //Based on checkbox values, do the following...
                 if (dirtyText.length == 0){
                     cleanText = "No text found";
@@ -68,6 +79,10 @@
                 }
                 else if (linebreaks){
                     cleanText = linebreakToComma(dirtyText);
+                }
+                else if (tabs){
+                    cleanText = removeTabs(dirtyText);
+                    console.log("tabs")
                 }
                 else {
                     cleanText = "No checkboxes ticked";

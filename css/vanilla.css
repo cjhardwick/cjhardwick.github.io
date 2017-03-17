@@ -1,17 +1,22 @@
+h2{
+    margin: 20px 0 20px 0;
+}
+
 input[type='checkbox']{
-    margin: 0 5px 00;
+    margin: 0 5px 0 0;
 }
 
 #dirtyText{
     width: 100%;
-    height: 150px;
+    height: 400px;
     padding: 19px;
     margin: 10px 0 10px 0;
 }
 
 #cleanTextOutput{
-    height: 150px;
-    margin: 10px 000;
+    height: 400px;
+    width: 100%;
+    margin: 30px 000;
 }
 
 .centerElements{
