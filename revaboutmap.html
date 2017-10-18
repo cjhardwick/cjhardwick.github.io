@@ -1,0 +1,1307 @@
+var map;
+
+            // svg path for target icon
+            var targetSVG = "M9,0C4.029,0,0,4.029,0,9s4.029,9,9,9s9-4.029,9-9S13.971,0,9,0z M9,15.93 c-3.83,0-6.93-3.1-6.93-6.93S5.17,2.07,9,2.07s6.93,3.1,6.93,6.93S12.83,15.93,9,15.93 M12.5,9c0,1.933-1.567,3.5-3.5,3.5S5.5,10.933,5.5,9S7.067,5.5,9,5.5 S12.5,7.067,12.5,9z";
+            
+            // svg path for plane icon
+            //var planeSVG = "m2,106h28l24,30h72l-44,-133h35l80,132h98c21,0 21,34 0,34l-98,0 -80,134h-35l43,-133h-71l-24,30h-28l15,-47";
+            
+            var planeSVG = "m2,106h28l24,30h72l-44,-133h35l80,132h98c21,0 21,34 0,34l-98,0 -80,134h-35l43,-133h-71l-24,30h-28l15,-47";
+
+            AmCharts.ready(function() {
+                map = new AmCharts.AmMap();
+
+                var dataProvider = {
+                    mapVar: AmCharts.maps.worldLow
+                    };
+
+                map.areasSettings = {
+                    unlistedAreasColor: "#8dd9ef"
+                    };
+
+                map.imagesSettings = {
+                    color: "#5969C2",
+                    rollOverColor: "#5969C2",
+                    selectedColor: "#5969C2",
+                    pauseDuration: 0.1,
+                    animationDuration: 1.2,
+                    adjustAnimationSpeed: true
+                    };
+
+                map.linesSettings = {
+                    color: "#585869",
+                    alpha: 0.4
+                    };
+
+                
+                // CITY LAT/LONG VARIABLES
+                var 
+                    // Brisbane, Australia
+                    brisLat = -27.46,
+                    brisLong = 153.02,
+                    // Los Angeles, USA
+                    laLat = 34.05,
+                    laLong = -118.2,
+                    // London, England
+                    lonLat = 51.50,
+                    lonLong = -0.127,
+                    // New York, USA
+                    NYlat = 40.71,
+                    NYlong = -74,
+                    // Wellington, NZ
+                    wellLat = -41.28,
+                    wellLong = 174.77,
+                    // Toronto, CAN
+                    torLat = 43.65,
+                    torLong = -79.38,
+                    // Ottowa, CAN
+                    ottLat = 45.42,
+                    ottLong = -75.69,
+                    // Abu Dhabi, UAE
+                    abuLat = 24.45,
+                    abuLong = 54.37,
+                    // Cape Town, S.Africa
+                    capeLat = -33.92,
+                    capeLong = 18.42,
+                    // Hong Kong
+                    hkLat = 22.39,
+                    hkLong = 114.10,
+                    // New Delhi, India
+                    ndLat = 28.61,
+                    ndLong = 77.20,
+                    // Bangalore, India
+                    banLat = 12.97,
+                    banLong = 77.59,
+                    // Hyderabad, India,
+                    hydLat = 17.38,
+                    hydLong = 78.48,
+                    // St.George's, Cayman Island
+                    stgLat = 12.05,
+                    stgLong = -61.74,
+                    // Berlin, Germany
+                    berLat = 52.52,
+                    berLong = 13.40,
+                    // Manila, Phillipines
+                    manLat = 14.59,
+                    manLong = 120.98,
+                    // Beijing, China
+                    beiLat = 39.90,
+                    beiLong = 116.40,
+                    // Vienna, Austria
+                    vieLat = 48.20,
+                    vieLong = 16.37,
+                    // Riyadh, Saudi Arabia
+                    riyLat = 24.71,
+                    riyLong = 46.67,
+                    // Paris, France
+                    parLat = 48.85,
+                    parLong = 2.35,
+                    // Mexico
+                    mexLat = 23.63,
+                    mexLong = -102.55
+                    // Papua New Guinea
+                    pngLat = -6.31,
+                    pngLong = 143.95,
+                    // Poland
+                    polLat = 51.91,
+                    polLong = 19.14,
+                    // Sweden
+                    sweLat = 60.12,
+                    sweLong = 18.64,
+                    // Trinidad & Tobago
+                    ttLat = 10.69,
+                    ttLong = -61.22,
+                    // Uruguay
+                    urLat = -32.52,
+                    urLong = -55.76
+                ;
+
+
+                // LINES BETWEEN CITIES
+                var lines = [
+                    
+                    // BRISBANE TO LA
+                    {
+                    id: "line1",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, laLat ],
+                    longitudes: [brisLong, laLong ]
+                    }, {
+                    id: "line2",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, laLat ],
+                    longitudes: [brisLong, laLong ]
+                    },
+                    
+                    // BRISBANE TO LONDON
+                    {
+                    id: "line3",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, lonLat ],
+                    longitudes: [brisLong, lonLong ]
+                    }, {
+                    id: "line4",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, lonLat ],
+                    longitudes: [brisLong, lonLong ]
+                    },
+
+                    // BRISBANE TO NEW YORK
+                    {
+                    id: "line5",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, NYlat ],
+                    longitudes: [brisLong, NYlong ]
+                    }, {
+                    id: "line6",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, NYlat ],
+                    longitudes: [brisLong, NYlong ]
+                    },
+
+                    // BRISBANE TO WELLINGTON
+                    {
+                    id: "line7",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, wellLat ],
+                    longitudes: [brisLong, wellLong ]
+                    }, {
+                    id: "line8",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, wellLat ],
+                    longitudes: [brisLong, wellLong ]
+                    },
+
+                    // BRISBANE TO TORONTO
+                    {
+                    id: "line9",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, torLat ],
+                    longitudes: [brisLong, torLong ]
+                    }, {
+                    id: "line10",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, torLat ],
+                    longitudes: [brisLong, torLong ]
+                    },
+
+                    // BRISBANE TO OTTOWA
+                    {
+                    id: "line11",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, ottLat],
+                    longitudes: [brisLong, ottLong ]
+                    }, {
+                    id: "line12",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, ottLat],
+                    longitudes: [brisLong, ottLong ]
+                    },
+
+                    // BRISBANE TO ABU DHABI
+                    {
+                    id: "line13",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, abuLat ],
+                    longitudes: [brisLong, abuLong ]
+                    }, {
+                    id: "line14",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, abuLat ],
+                    longitudes: [brisLong, abuLong ]
+                    },
+                    
+                    // BRISBANE TO CAPE TOWN
+                    {
+                    id: "line15",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, capeLat ],
+                    longitudes: [brisLong, capeLong ]
+                    }, {
+                    id: "line16",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, capeLat ],
+                    longitudes: [brisLong, capeLong ]
+                    },
+
+                    // BRISBANE TO HONG KONG
+                    {
+                    id: "line17",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, hkLat ],
+                    longitudes: [brisLong, hkLong ] 
+                    }, {
+                    id: "line18",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, hkLat ],
+                    longitudes: [brisLong, hkLong ]
+                    },
+                    
+                    // BRISBANE TO NEW DELHI
+                    {
+                    id: "line19",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, ndLat ],
+                    longitudes: [brisLong, ndLong ] 
+                    }, {
+                    id: "line20",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, ndLat ],
+                    longitudes: [brisLong, ndLong ] 
+                    },
+
+                    // BRISBANE TO BANGALORE
+                    {
+                    id: "line21",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, banLat ],
+                    longitudes: [brisLong, banLong ] 
+                    }, {
+                    id: "line22",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, banLat ],
+                    longitudes: [brisLong, banLong ] 
+                    },
+
+                    // BRISBANE TO HYDERABAD
+                    {
+                    id: "line23",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, hydLat ],
+                    longitudes: [brisLong, hydLong ] 
+                    }, {
+                    id: "line24",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, hydLat ],
+                    longitudes: [brisLong, hydLong ] 
+                    },
+
+                    // BRISBANE TO BANGALORE
+                    {
+                    id: "line25",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, banLat ],
+                    longitudes: [brisLong, banLong ] 
+                    }, {
+                    id: "line26",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, banLat ],
+                    longitudes: [brisLong, banLong ] 
+                    },
+
+                    // BRISBANE TO HYDERABAD
+                    {
+                    id: "line27",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, stgLat ],
+                    longitudes: [brisLong, stgLong ] 
+                    }, {
+                    id: "line28",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, stgLat ],
+                    longitudes: [brisLong, stgLong ] 
+                    },
+
+                    // BRISBANE TO ST.GEORGE
+                    {
+                    id: "line29",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, berLat ],
+                    longitudes: [brisLong, berLong ] 
+                    }, {
+                    id: "line30",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, berLat ],
+                    longitudes: [brisLong, berLong ] 
+                    },
+
+                    // BRISBANE TO MANILLA
+                    {
+                    id: "line31",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, manLat ],
+                    longitudes: [brisLong, manLong ] 
+                    }, {
+                    id: "line32",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, manLat ],
+                    longitudes: [brisLong, manLong ] 
+                    },
+
+                    // BRISBANE TO BEIJING
+                    {
+                    id: "line33",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, beiLat ],
+                    longitudes: [brisLong, beiLong ] 
+                    }, {
+                    id: "line34",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, beiLat ],
+                    longitudes: [brisLong, beiLong ] 
+                    },
+
+                    // BRISBANE TO VIENNA
+                    {
+                    id: "line35",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, vieLat ],
+                    longitudes: [brisLong, vieLong ] 
+                    }, {
+                    id: "line36",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, vieLat ],
+                    longitudes: [brisLong, vieLong]  
+                    },
+
+                    // BRISBANE TO RIYADH
+                    {
+                    id: "line37",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, riyLat ],
+                    longitudes: [brisLong, riyLong ] 
+                    }, {
+                    id: "line38",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, riyLat ],
+                    longitudes: [brisLong, riyLong ] 
+                    },
+                    
+                    // BRISBANE TO PARIS
+                    {
+                    id: "line39",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, parLat ],
+                    longitudes: [brisLong, parLong ] 
+                    }, {
+                    id: "line40",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, parLat ],
+                    longitudes: [brisLong, parLong ] 
+                    },
+
+                    // BRISBANE TO MEXICO
+                    {
+                    id: "line41",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, mexLat ],
+                    longitudes: [brisLong, mexLong ] 
+                    }, {
+                    id: "line42",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, parLat ],
+                    longitudes: [brisLong, parLong ] 
+                    },
+
+                    // BRISBANE TO PNG
+                    {
+                    id: "line43",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, pngLat ],
+                    longitudes: [brisLong, pngLong ] 
+                    }, {
+                    id: "line44",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, pngLat ],
+                    longitudes: [brisLong, pngLong ] 
+                    },
+
+                    // BRISBANE TO POLAND
+                    {
+                    id: "line45",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, polLat ],
+                    longitudes: [brisLong, polLong ] 
+                    }, {
+                    id: "line46",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, polLat ],
+                    longitudes: [brisLong, polLong ] 
+                    },
+
+                    // BRISBANE TO SWEDEN
+                    {
+                    id: "line47",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, sweLat ],
+                    longitudes: [brisLong, sweLong ] 
+                    }, {
+                    id: "line48",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, sweLat ],
+                    longitudes: [brisLong, sweLong ] 
+                    },
+
+                    // BRISBANE TO TRINIDAD & TOBAGO
+                    {
+                    id: "line49",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, ttLat ],
+                    longitudes: [brisLong, ttLong ] 
+                    }, {
+                    id: "line50",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, ttLat ],
+                    longitudes: [brisLong, ttLong ] 
+                    },
+
+                    // BRISBANE TO URUGUAY
+                    {
+                    id: "line51",
+                    arc: -0.85,
+                    alpha: 0.3,
+                    latitudes: [brisLat, urLat ],
+                    longitudes: [brisLong, urLong ] 
+                    }, {
+                    id: "line52",
+                    alpha: 0,
+                    color: "#000000",
+                    latitudes: [brisLat, urLat ],
+                    longitudes: [brisLong, urLong] 
+                    },
+                ];
+
+
+                // cities TARGET SVG
+                var cities = [{
+                    svgPath: targetSVG,
+                    title: "Brisbane",
+                    latitude: brisLat,
+                    longitude: brisLong
+                    }, 
+                    {
+                    svgPath: targetSVG,
+                    title: "Los Angeles",
+                    latitude: laLat,
+                    longitude: laLong
+                    }, 
+                    {
+                    svgPath: targetSVG,
+                    title: "London",
+                    latitude: lonLat,
+                    longitude: lonLong
+                    }, 
+                    {
+                    svgPath: targetSVG,
+                    title: "New York",
+                    latitude: NYlat,
+                    longitude: NYlong
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Wellington",
+                    latitude: wellLat,
+                    longitude: wellLong
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Toronto",
+                    latitude: torLat,
+                    longitude: torLong
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Ottowa",
+                    latitude: ottLat,
+                    longitude: ottLong
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Abu Dhabi",
+                    latitude: abuLat,
+                    longitude: abuLong
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Cape Town",
+                    latitude: capeLat,
+                    longitude: capeLong
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Hong Kong",
+                    latitude: hkLat,
+                    longitude: hkLong
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "New Delhi",
+                    latitude: ndLat,
+                    longitude: ndLong
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Hyderabd",
+                    latitude: hydLat,
+                    longitude: hydLong
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Bangalore",
+                    latitude: banLat,
+                    longitude: banLong,
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "St. George's",
+                    latitude: stgLat,
+                    longitude: stgLong,
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Berlin",
+                    latitude: berLat,
+                    longitude: berLong,
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Manila",
+                    latitude: manLat,
+                    longitude: manLong,
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Beijing",
+                    latitude: beiLat,
+                    longitude: beiLong,
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Vienna",
+                    latitude: vieLat,
+                    longitude: vieLong,
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Riyadh",
+                    latitude: riyLat,
+                    longitude: riyLong,
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Paris",
+                    latitude: parLat,
+                    longitude: parLong,
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Mexico",
+                    latitude: mexLat,
+                    longitude: mexLong,
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Papua New Guinea",
+                    latitude: pngLat,
+                    longitude: pngLong,
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Poland",
+                    latitude: polLat,
+                    longitude: polLong,
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Sweden",
+                    latitude: sweLat,
+                    longitude: sweLong,
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Trinidad & Tobago",
+                    latitude: ttLat,
+                    longitude: ttLong,
+                    },
+                    {
+                    svgPath: targetSVG,
+                    title: "Uruguay",
+                    latitude: urLat,
+                    longitude: urLong,
+                    },
+                
+
+                // cities PLAN SVG
+                    // Brisbane to LA
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line2",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line1",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    }, 
+
+                    //Brisbane to London
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line4",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line3",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to New York
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line6",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line5",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Wellington
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line8",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line7",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Toronto
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line10",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line9",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Ottowa
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line12",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line11",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Abu Dhabi
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line14",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line13",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Cape Town
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line16",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line15",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Hong Kong
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line18",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line17",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to New Dehli
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line20",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line19",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to New Dehli
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line22",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line21",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Bangalore
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line24",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line23",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Hyderabd
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line26",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line25",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to St Georges
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line28",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line27",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to St Georges
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line30",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line29",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Berlin
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line32",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line31",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Beijing
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line34",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line33",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Vienna
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line36",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line35",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Riyadh
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line38",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line37",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Paris
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line40",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line39",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+                    
+                    //Brisbane to Mexico
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line42",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line41",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to PNG
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line44",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line43",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to POLAND
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line46",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line45",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to SWEDEM
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line48",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line47",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Trinidad & Tobago
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line50",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line49",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+
+                    //Brisbane to Uruguay
+                    {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#000000",
+                    alpha: 0.1,
+                    animateAlongLine: true,
+                    lineId: "line52",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.3
+                    }, {
+                    svgPath: planeSVG,
+                    positionOnLine: 0,
+                    color: "#585869",
+                    animateAlongLine: true,
+                    lineId: "line51",
+                    flipDirection: true,
+                    loop: true,
+                    scale: 0.03,
+                    positionScale: 1.8
+                    },
+                ];
+
+                dataProvider.images = cities;
+                dataProvider.lines = lines;
+                dataProvider.zoomLevel = 1;
+                dataProvider.zoomLongitude = 50;
+                dataProvider.zoomLatitude = 42;
+                map.dataProvider = dataProvider;
+                map.write("mapdiv");
+                });
