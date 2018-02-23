@@ -1,100 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">
 <!-- If IE use the latest rendering engine -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!-- Set the page to the width of the device and set the zoon level -->
 <meta name="viewport" content="width = device-width, initial-scale = 1">
 <!-- Styls -->
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="css/vanilla.css">
-<title>Hi, i'm CJ Hardwick</title> 
+
+<style type="text/css">
+
+h2 {
+  margin: 20px 0 20px 0; }
+
+input[type='checkbox'] {
+  margin: 0 5px 0 0; }
+
+#dirtyText {
+  width: 100%;
+  height: 500px;
+  padding: 19px;
+  margin: 20px 0 10px 0;
+}
+
+#cleanTextOutput {
+  width: 100%;
+  height: 500px;
+  padding: 19px;
+  margin: 20px 0 10px 0;
+}
+
+.centerElements {
+  text-align: center; }
+
+#action-buttons {
+  display: block;
+  margin: 20px 0 20px 0;
+  text-align: center;
+}
+
+</style>
+
+<title>CJ Hardwick</title>
 
 <body>
 <div class="container">
 
-    <div class="page-header">
-        <h1>Tools</h1>
+<div class="page-header">
+  <h1>Text tools</h1>
+</div>
+
+<!-- COLUMN 1 -->
+<div class="col-md-2">
+  <p><input type="checkbox" id="whitespace">Remove Whitespace</input></p>
+  <p><input type="checkbox" id="linebreaks">Linebreak to Comma</input></p>
+  <p><input type="checkbox" id="tabs">Remove Tabs</input></p>
+  <div id="action-buttons">
+    <div class="col-xs-6">
+      <button id="resetBTN" type="button" class="btn btn-link">Reset</button>
+    </div>
+    <div class="col-xs-6">
+      <button type="button" class="btn btn-primary"
+        onclick="   stringCleaner(document.getElementById('dirtyText').value,
+                    document.getElementById('whitespace').checked,
+                    document.getElementById('linebreaks').checked,
+                    document.getElementById('tabs').checked)">Go!</button>
     </div>
 
-    <div class="container">
-        <h2>Remove Whitespace and Linebreaks</h2>
-
-    <div class="col-md-6">
-            <form>
-                <div class="col-md-4">
-                    <input type="checkbox" id="whitespace">Remove Whitespace</input></div>
-                <div class="col-md-4">
-                    <input type="checkbox" id="linebreaks">Linebreak to Comma</input></div>
-                <div class="col-md-4">
-                    <input type="checkbox" id="tabs">Remove Tabs</input></div>
-                <textarea id="dirtyText"></textarea>
-                <div class="centerElements">
-                    <button type="button" 
-                        onclick="   stringCleaner(document.getElementById('dirtyText').value, 
-                                    document.getElementById('whitespace').checked,
-                                    document.getElementById('linebreaks').checked,
-                                    document.getElementById('tabs').checked)">Clean Now</button>
-                </div>
-            </form>
-    </div>
-    
-    <div class="col-md-6">
-        <!-- OUTPUT cleanText -->
-        <textarea id="cleanTextOutput"></textarea>
-    </div>
-
-        <script>
-            // FUNCTION - Remove Whitespace
-                function removeWhitespace(text){
-                    var cleanText = text.replace(/\s/g,'');
-                    return cleanText;
-                }
-
-            // FUNCTION - Remove Tabs
-            function removeTabs(text){
-                var cleanText = text.replace(/\t/g,'');
-                return cleanText;
-            }
-        
-            // FUNCTION - Replace LINEBREAKS with COMMAS
-                function linebreakToComma(text){
-                    var cleanText = text.replace(/\r?\n|\r/g,',');
-                    return cleanText;
-                }
-            
-            // FUNCTION - Perform String Cleaning
-            function stringCleaner(dirtyText,whitespace,linebreaks,tabs){
-                //Based on checkbox values, do the following...
-                if (dirtyText.length == 0){
-                    cleanText = "No text found";
-                }
-                else if (whitespace && linebreaks){
-                    var cleanText = linebreakToComma(dirtyText);
-                        cleanText = removeWhitespace(cleanText);
-                }
-                else if (whitespace){
-                    cleanText = removeWhitespace(dirtyText);
-                }
-                else if (linebreaks){
-                    cleanText = linebreakToComma(dirtyText);
-                }
-                else if (tabs){
-                    cleanText = removeTabs(dirtyText);
-                    console.log("tabs")
-                }
-                else {
-                    cleanText = "No checkboxes ticked";
-                }
-                
-                //Output cleanText to page
-                document.getElementById("cleanTextOutput").innerHTML = cleanText;
-            
-            } //END stringCleaner FUNCTION
-            
-        </script>
-    </body>   
-    </html>
+  </div>
+</div>
 
 
+<!-- COLUMN 2 -->
+<div class="col-md-5">
+  <textarea id="dirtyText" autofocus placeholder="Put the content you want to clean here ..."></textarea>
+</div>
+
+<!-- COLUMN 3 -->
+<div class="col-md-5">
+  <textarea id="cleanTextOutput" style=""></textarea>
+</div>
+
+<script>
+// FUNCTION - Remove Whitespace
+    function removeWhitespace(text){
+        var cleanText = text.replace(/\s/g,'');
+        return cleanText;
+    }
+
+// FUNCTION - Remove Tabs
+function removeTabs(text){
+    var cleanText = text.replace(/\t/g,'');
+    return cleanText;
+}
+
+// FUNCTION - Replace LINEBREAKS with COMMAS
+    function linebreakToComma(text){
+        var cleanText = text.replace(/\r?\n|\r/g,',');
+        return cleanText;
+    }
+
+// FUNCTION - Perform String Cleaning
+function stringCleaner(dirtyText,whitespace,linebreaks,tabs){
+    //Based on checkbox values, do the following...
+    if (dirtyText.length == 0){
+        cleanText = "No text found";
+    }
+    else if (whitespace && linebreaks){
+        var cleanText = linebreakToComma(dirtyText);
+            cleanText = removeWhitespace(cleanText);
+    }
+    else if (whitespace){
+        cleanText = removeWhitespace(dirtyText);
+    }
+    else if (linebreaks){
+        cleanText = linebreakToComma(dirtyText);
+    }
+    else if (tabs){
+        cleanText = removeTabs(dirtyText);
+    }
+    else {
+        cleanText = "No checkboxes ticked";
+    }
+
+    // Output cleanText to page
+    document.getElementById("cleanTextOutput").value = cleanText;
+    // Make output textarea highlighted after action
+    document.getElementById("cleanTextOutput").style.autofocus = 1;
+
+
+}; // -- END stringCleaner FUNCTION
+
+
+// FUNCTION - clear text from all 'textareas' elements
+function clearTextAreas(){
+  var textAreas = document.getElementsByTagName("textarea");
+  for(i=0; i < textAreas.length; i++){
+    textAreas[i].value = "";
+  };
+};
+
+// EVENT - reset button
+var resetBTN = document.getElementById("resetBTN");
+resetBTN.addEventListener("click",clearTextAreas);
+
+</script>
+
+</body>
+</html>
